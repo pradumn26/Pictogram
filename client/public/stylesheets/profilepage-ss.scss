@@ -1,0 +1,67 @@
+#profilePage {
+  padding: 0;
+
+  #ppRow1 {
+    margin-top: 100px;
+
+    #profileCard {
+      margin-top: 80px;
+      min-height: 400px;
+      border: 1px solid;
+      border-color: #3392a7;
+      border-radius: 4px;
+
+      img {
+        display: flow-root;
+        height: 150px;
+        width: 150px;
+        border-radius: 50%;
+        margin-top: -75px;
+        margin-right: auto;
+        margin-left: auto;
+      }
+
+      h2 {
+        text-align: center;
+        color: #3392a7;
+        margin-top: 10px;
+        margin-bottom: 30px;
+      }
+
+      strong {
+        display: block;
+        padding-left: 30px;
+        margin-bottom: 7px;
+      }
+
+      button {
+        display: block;
+        margin-top: 5px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      #editProfileButton {
+        margin-top: 30px;
+        background-color: #3392a7;
+        color: #fff;
+      }
+
+      #uploadButton {
+        margin-top: 7px;
+        display: block;
+        width: 100px;
+        height: 40px;
+        text-align: center;
+        background-color: #3392a7;
+        margin-left: auto;
+        margin-right: auto;
+        color: #fff;
+      }
+    }
+
+    #gallery {
+
+    }
+  }
+}

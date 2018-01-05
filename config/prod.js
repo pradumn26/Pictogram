@@ -4,5 +4,6 @@ exports = module.exports = {
     facebookAuthClientID: process.env.FACEBOOK_AUTH_CLIENT_ID,
     facebookAuthClientSecret: process.env.FACEBOOK_AUTH_CLIENT_SECRET,
     mongoURI: process.env.MONGO_URI,
-    cookieKey: process.env.COOKIE_KEY
+    cookieKey: process.env.COOKIE_KEY,
+    currentDomain: process.env.CURRENT_DOMAIN
 };

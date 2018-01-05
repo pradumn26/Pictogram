@@ -24,27 +24,45 @@ passport.deserializeUser(
 );
 passport.use(
     new GoogleStrategy({
-        clientID: keys.googleAuthClientID,
-        clientSecret: keys.googleAuthClientSecret,
-        callbackURL: '/auth/google/callback'
-    }, (accessToken, refreshToken, profile, done) => {
-        User.findOne({googleId: profile.id})
-            .then(
-                (user) => {
-                    if (!user) {
-                        new User({googleId: profile.id, strategy: strategies.google})
-                            .save()
-                            .then(
-                                (newUser) => {
-                                    done(null, newUser)
+            clientID: keys.googleAuthClientID,
+            clientSecret: keys.googleAuthClientSecret,
+            callbackURL: '/auth/google/callback'
+        },
+        (accessToken, refreshToken, profile, done) => {
+            User.findOne({'security.googleId': profile.id})
+                .then(
+                    (user) => {
+                        if (!user) {
+                            new User({
+                                security: {
+                                    googleId: profile.id,
+                                    strategy: 'google',
+                                    email: profile.emails[0].value
+                                },
+                                profile: {
+                                    firstName: profile.displayName.split(' ')[0],
+                                    lastName: profile.displayName.split(' ')[1],
+                                    profilePhoto: profile.photos[0].value,
+                                    gender: profile.gender
+                                },
+                                accountDetails: {
+                                    email: profile.emails[0].value,
+                                    isVerified: true
                                 }
-                            );
+                            })
+                                .save()
+                                .then(
+                                    (newUser) => {
+                                        done(null, newUser)
+                                    }
+                                );
+                        }
+                        else
+                            done(null, user);
                     }
-
-                    done(null, user);
-                }
-            );
-    })
+                );
+        }
+    )
 );
 
 passport.use(
@@ -55,13 +73,25 @@ passport.use(
             callbackURL: '/auth/facebook/callback'
         },
         (accessToken, refreshToken, profile, done) => {
-            User.findOne({facebookId: profile.id})
+            User.findOne({'security.facebookId': profile.id})
                 .then(
                     (user) => {
-                        if(user) {
+                        if (user) {
                             done(null, user);
                         } else {
-                            new User({facebookId: profile.id, strategy: strategies.facebook}).save()
+                            new User({
+                                profile: {
+                                    firstName: profile.displayName.split(' ')[0],
+                                    lastName: profile.displayName.split(' ')[1]
+                                },
+                                security: {
+                                    facebookId: profile.id,
+                                    strategy: 'facebook'
+                                },
+                                accountDetails: {
+                                    isVerified: true
+                                }
+                            }).save()
                                 .then(
                                     (newUser) => {
                                         done(null, newUser);
@@ -77,13 +107,13 @@ passport.use(
 passport.use(
     new LocalStrategy(
         (username, password, done) => {
-            User.findOne({username, password})
+            User.findOne({'security.username': username, 'security.password': password})
                 .then(
                     (user) => {
-                        if(user) {
+                        if (user) {
                             done(null, user);
                         } else {
-                            done(null, false);
+                            done(null, false, {message: 'invalid username or password'});
                         }
                     }
                 )

@@ -1,0 +1,52 @@
+#signUpPage {
+  min-height: 100vh;
+  width:100vw;
+  background-color:#fafafa;
+
+  #mainRow {
+    height: 100%;
+    padding-top: 50px;
+    padding-bottom: 70px;
+
+    #signUpCard {
+      border: 1px solid;
+      border-color: #e6e6e6;
+      min-height: 650px;
+      background-color: #fff;
+
+      form {
+
+        h4 {
+          margin-top: 40px;
+          margin-bottom: 20px;
+        }
+
+        button {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 30px;
+          margin-bottom: 10px;
+        }
+
+        #loader {
+          border: 8px solid #f3f3f3; /* Light grey */
+          border-top: 8px solid #3498db; /* Blue */
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          animation: spin 1s linear infinite;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 30px;
+          margin-bottom: 10px;
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      }
+    }
+  }
+}
