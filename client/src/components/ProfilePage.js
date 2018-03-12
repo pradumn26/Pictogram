@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import NotLoggedIn from './NotLoggedIn';
+import GalleryScroller from './GalleryScroller';
+import MyGalleryScroller from './MyGalleryScroller';
 
 class ProfilePage extends Component {
     render() {
@@ -23,13 +25,13 @@ class ProfilePage extends Component {
                                 </div>
 
                                 <div>
-                                    <strong>Posts: {}</strong>
+                                    <strong>Posts: {this.props.currentUser.postsNumber}</strong>
                                 </div>
                                 <div>
-                                    <strong>Followers: {}</strong>
+                                    <strong>Followers: {this.props.currentUser.followersNumber}</strong>
                                 </div>
                                 <div>
-                                    <strong>Following: {}</strong>
+                                    <strong>Following: {this.props.currentUser.followingNumber}</strong>
                                 </div>
 
                                 <button id="editProfileButton" className="btn">Edit profile</button>
@@ -48,6 +50,7 @@ class ProfilePage extends Component {
                             </div>
 
                             <div className="col-sm-8 col-10 ml-auto mr-auto" id="gallery">
+                                <MyGalleryScroller/>
                             </div>
                         </div>
                     </div>

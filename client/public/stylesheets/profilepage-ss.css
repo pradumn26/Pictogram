@@ -4,7 +4,7 @@
     margin-top: 100px; }
     #profilePage #ppRow1 #profileCard {
       margin-top: 80px;
-      min-height: 400px;
+      height: 400px;
       border: 1px solid;
       border-color: #3392a7;
       border-radius: 4px; }
@@ -44,5 +44,12 @@
         margin-left: auto;
         margin-right: auto;
         color: #fff; }
+      #profilePage #ppRow1 #profileCard #followButton {
+        margin-top: 30px;
+        background-color: #3392a7;
+        color: #fff; }
+    #profilePage #ppRow1 #gallery {
+      height: 500px;
+      margin-top: 10px; }
 
 /*# sourceMappingURL=profilepage-ss.css.map */

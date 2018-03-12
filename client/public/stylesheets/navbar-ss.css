@@ -1,4 +1,19 @@
 #navbar {
   background-color: #3392a7; }
+  #navbar i {
+    color: #B2DFDB; }
+
+@media screen and (max-width: 575px) {
+  #navbar {
+    background-color: #3392a7; }
+    #navbar ul {
+      display: block;
+      margin-top: 7px;
+      margin-bottom: 7px; }
+    #navbar ul li {
+      display: inline;
+      text-align: left; }
+      #navbar ul li i {
+        color: #B2DFDB; } }
 
 /*# sourceMappingURL=navbar-ss.css.map */

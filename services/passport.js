@@ -22,101 +22,107 @@ passport.deserializeUser(
         )
     }
 );
-passport.use(
-    new GoogleStrategy({
-            clientID: keys.googleAuthClientID,
-            clientSecret: keys.googleAuthClientSecret,
-            callbackURL: '/auth/google/callback'
-        },
-        (accessToken, refreshToken, profile, done) => {
-            User.findOne({'security.googleId': profile.id})
-                .then(
-                    (user) => {
-                        if (!user) {
-                            new User({
-                                security: {
-                                    googleId: profile.id,
-                                    strategy: 'google',
-                                    email: profile.emails[0].value
-                                },
-                                profile: {
-                                    firstName: profile.displayName.split(' ')[0],
-                                    lastName: profile.displayName.split(' ')[1],
-                                    profilePhoto: profile.photos[0].value,
-                                    gender: profile.gender
-                                },
-                                accountDetails: {
-                                    email: profile.emails[0].value,
-                                    isVerified: true
+passport.use(new GoogleStrategy({
+        clientID: keys.googleAuthClientID,
+        clientSecret: keys.googleAuthClientSecret,
+        callbackURL: '/auth/google/callback'
+    }, (accessToken, refreshToken, profile, done) => {
+        User.findOne({'security.googleId': profile.id})
+            .then(
+                (user) => {
+                    if (!user) {
+                        new User({
+                            security: {
+                                googleId: profile.id,
+                                strategy: 'google',
+                                email: profile.emails[0].value
+                            },
+                            profile: {
+                                firstName: profile.displayName.split(' ')[0],
+                                lastName: profile.displayName.split(' ')[1],
+                                profilePhoto: profile.photos[0].value,
+                                gender: profile.gender
+                            },
+                            accountDetails: {
+                                email: profile.emails[0].value,
+                                isVerified: true
+                            }
+                        }).save()
+                            .then(
+                                (newUser) => {
+                                    done(null, newUser)
                                 }
-                            })
-                                .save()
-                                .then(
-                                    (newUser) => {
-                                        done(null, newUser)
-                                    }
-                                );
-                        }
-                        else
-                            done(null, user);
-                    }
-                );
-        }
-    )
-);
+                            );
+                        return done(null, profile);
+                    } else done(null, user);
+                }
+            );
+    }
+));
 
-passport.use(
-    new FacebookStrategy(
-        {
-            clientID: keys.facebookAuthClientID,
-            clientSecret: keys.facebookAuthClientSecret,
-            callbackURL: '/auth/facebook/callback'
-        },
-        (accessToken, refreshToken, profile, done) => {
-            User.findOne({'security.facebookId': profile.id})
-                .then(
-                    (user) => {
-                        if (user) {
-                            done(null, user);
-                        } else {
-                            new User({
-                                profile: {
-                                    firstName: profile.displayName.split(' ')[0],
-                                    lastName: profile.displayName.split(' ')[1]
-                                },
-                                security: {
-                                    facebookId: profile.id,
-                                    strategy: 'facebook'
-                                },
-                                accountDetails: {
-                                    isVerified: true
+passport.use(new FacebookStrategy({
+        clientID: keys.facebookAuthClientID,
+        clientSecret: keys.facebookAuthClientSecret,
+        callbackURL: '/auth/facebook/callback'
+    }, (accessToken, refreshToken, profile, done) => {
+        User.findOne({'security.facebookId': profile.id})
+            .then(
+                (user) => {
+                    if (user) {
+                        done(null, user);
+                    } else {
+                        new User({
+                            profile: {
+                                firstName: profile.displayName.split(' ')[0],
+                                lastName: profile.displayName.split(' ')[1]
+                            },
+                            security: {
+                                facebookId: profile.id,
+                                strategy: 'facebook'
+                            },
+                            accountDetails: {
+                                isVerified: true
+                            }
+                        }).save()
+                            .then(
+                                (newUser) => {
+                                    done(null, newUser);
                                 }
-                            }).save()
-                                .then(
-                                    (newUser) => {
-                                        done(null, newUser);
-                                    }
-                                )
-                        }
+                            );
+                        return done(null, profile);
                     }
-                );
-        }
-    )
-);
+                }
+            );
+    }
+));
 
-passport.use(
-    new LocalStrategy(
-        (username, password, done) => {
-            User.findOne({'security.username': username, 'security.password': password})
-                .then(
-                    (user) => {
-                        if (user) {
-                            done(null, user);
-                        } else {
-                            done(null, false, {message: 'invalid username or password'});
-                        }
-                    }
-                )
-        }
-    )
-);
+passport.use(new LocalStrategy((username, password, done) => {
+    User.findOne({'security.username': username, 'security.password': password})
+        .then(
+            (user) => {
+                if (user) {
+                    done(null, user);
+                } else {
+                    done(null, false, {message: 'invalid username or password'});
+                }
+            }
+        );
+}));
+
+passport.use('my-google', new GoogleStrategy({
+        clientID: keys.googleAuthClientID,
+        clientSecret: keys.googleAuthClientSecret,
+        callbackURL: '/auth/google/callback'
+    }, (accessToken, refreshToken, profile, done) => {
+        done(null, profile);
+    }
+));
+
+passport.use('my-facebook', new FacebookStrategy({
+        clientID: keys.facebookAuthClientID,
+        clientSecret: keys.facebookAuthClientSecret,
+        callbackURL: '/auth/facebook/callback'
+    }, (accessToken, refreshToken, profile, done) => {
+        done(null, profile);
+    }
+));

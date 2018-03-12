@@ -17,14 +17,21 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static('public'));
+app.use(express.static('client/build'));
 
 require('./models/User');
+require('./models/MediaPost');
 require('./services/passport');
 require('./routes/authRoutes/googleAuthRoutes')(app);
 require('./routes/authRoutes/facebookAuthRoutes')(app);
 require('./routes/authRoutes/localAuthRoutes')(app);
 require('./routes/authRoutes/generalAuthRoutes')(app);
 require('./routes/uploadRoutes/photoUploadRoute')(app);
+require('./routes/apis/fetchPostsApi')(app);
+require('./routes/apis/checkUsernameApi')(app);
+require('./routes/apis/searchUserApi')(app);
+require('./routes/apis/fetchOtherUser')(app);
+require('./routes/apis/fetchOtherUserPostsApi')(app);
 
 const PORT = process.env.NODE_ENV || 4444;
 app.listen(PORT, () => {
