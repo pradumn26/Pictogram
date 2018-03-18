@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import NotLoggedIn from './NotLoggedIn';
-import GalleryScroller from './GalleryScroller';
 import MyGalleryScroller from './MyGalleryScroller';
+import ContentNotAvailable from './ContentNotFound';
 
 class ProfilePage extends Component {
     render() {
@@ -34,28 +34,50 @@ class ProfilePage extends Component {
                                     <strong>Following: {this.props.currentUser.followingNumber}</strong>
                                 </div>
 
-                                <button id="editProfileButton" className="btn">Edit profile</button>
+                                <button id="editProfileButton" className="btn" style={{cursor: 'pointer'}}>Edit
+                                    profile
+                                </button>
 
                                 <form action="/upload" method="POST" encType="multipart/form-data" id="uploadForm">
-                                    <div className="btn" id="uploadButton">
+                                    <div className="btn"
+                                         id="uploadButton"
+                                         style={{
+                                             cursor: 'pointer',
+                                             padding: '0'
+                                         }}>
                                         <span style={{position: 'relative', left: '10px'}}>Upload</span>
                                         <input
                                             name="myImage"
                                             type="file"
-                                            style={{opacity: 0, position: 'relative', right: '30px'}}
+                                            style={{
+                                                opacity: 0,
+                                                position: 'relative',
+                                                right: '50px',
+                                                cursor: 'pointer',
+                                                width: '100%',
+                                                height: '100%'
+                                            }}
                                             accept="image/*"
-                                            onChange={() => {document.getElementById('uploadForm').submit()}}/>
+                                            onChange={() => {
+                                                document.getElementById('uploadForm').submit()
+                                            }}/>
                                     </div>
                                 </form>
                             </div>
 
                             <div className="col-sm-8 col-10 ml-auto mr-auto" id="gallery">
-                                <MyGalleryScroller/>
+                                {this.renderPosts()}
                             </div>
                         </div>
                     </div>
                 );
         }
+    }
+
+    renderPosts() {
+        if (this.props.currentUser.postsNumber > 0)
+            return (<MyGalleryScroller/>);
+        else return (<ContentNotAvailable/>);
     }
 }
 

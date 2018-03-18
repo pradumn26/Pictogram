@@ -2,7 +2,7 @@ const {Schema} = require('mongoose');
 
 const commentSchema = new Schema({
     content: String,
-    likesCount: {type: Number, default: 0}
+    username: String
 });
 
 exports = module.exports = commentSchema;

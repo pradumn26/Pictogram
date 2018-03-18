@@ -41,7 +41,8 @@ const UserSchema = new Schema({
     followersList: [followersSchema],
     followingList: [followingSchema],
     nextPost: {type: Number, default: 1},
-    feed: [postsSchema]
+    feed: [postsSchema],
+    likedPosts: [postsSchema]
 });
 
 mongoose.model('user', UserSchema);

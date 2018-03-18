@@ -22,7 +22,7 @@ class LoginForm extends Component {
                 <Field component={LoginFormField} name="password" label="Password"/>
                 <button type="submit"
                         className="btn btn-primary"
-                        style={{display: 'block', margin: 'auto', marginTop: '40px'}}>
+                        style={{display: 'block', margin: 'auto', marginTop: '40px', cursor: 'pointer'}}>
                     Submit
                 </button>
             </form>

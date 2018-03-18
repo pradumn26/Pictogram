@@ -4,10 +4,11 @@ import {connect} from 'react-redux';
 import NotLoggedIn from './NotLoggedIn';
 import {fetchOtherUser} from "../actions";
 import MyGalleryScroller from './MyGalleryScroller';
+import FollowButton from './FollowButton';
+import ContentNotFound from './ContentNotFound';
 
 class OtherUser extends Component {
     render() {
-        console.log(this.props.currentUser);
         switch (this.props.currentUser) {
             case null:
                 return null;
@@ -45,7 +46,7 @@ class OtherUser extends Component {
                                 </div>
 
                                 <div className="col-sm-8 col-10 ml-auto mr-auto" id="gallery">
-                                    <MyGalleryScroller username={this.props.match.params.user}/>
+                                    {this.renderOtherUserPosts.bind(this)()}
                                 </div>
                             </div>
                         </div>
@@ -54,16 +55,24 @@ class OtherUser extends Component {
         }
     }
 
+    renderOtherUserPosts() {
+        if(this.props.otherUserReducer.profile.postsNumber > 0)
+            return (<MyGalleryScroller username={this.props.match.params.user}/>);
+        else
+            return (<ContentNotFound/>);
+    }
+
     componentDidMount() {
         this.props.fetchOtherUser(this.props.match.params.user);
     }
 
     renderFollowButton() {
+        console.log(this.props.otherUserReducer.isFollowing);
         if (this.props.match.params.user === this.props.currentUser.username)
             return null;
         else
             return (
-                <button className="btn" id="followButton">Follow</button>
+                <FollowButton isFollowing={this.props.otherUserReducer.isFollowing} username={this.props.match.params.user}/>
             );
     }
 }

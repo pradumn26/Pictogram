@@ -32,6 +32,14 @@ require('./routes/apis/checkUsernameApi')(app);
 require('./routes/apis/searchUserApi')(app);
 require('./routes/apis/fetchOtherUser')(app);
 require('./routes/apis/fetchOtherUserPostsApi')(app);
+require('./routes/apis/followApi')(app);
+require('./routes/apis/unfollowApi')(app);
+require('./routes/apis/fetchFeed')(app);
+require('./routes/apis/fetchFeedPost')(app);
+require('./routes/apis/likeApi')(app);
+require('./routes/apis/unlikeApi')(app);
+require('./routes/apis/addCommentApi')(app);
+require('./routes/apis/havePosts')(app);
 
 const PORT = process.env.NODE_ENV || 4444;
 app.listen(PORT, () => {

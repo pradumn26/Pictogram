@@ -106,8 +106,10 @@ class SearchBar extends Component {
                                     }}>
                                     <div className=""
                                          style={{
-                                             height: '40px',
-                                             width: '200px'
+                                             height: '50px',
+                                             width: '200px',
+                                             paddingTop: '5px',
+                                             paddingLeft: '5px'
                                          }}>
                                         <img className=""
                                              src={user.profile.profilePhoto ? user.profile.profilePhoto : '/images/default-profile-picture.jpg'}

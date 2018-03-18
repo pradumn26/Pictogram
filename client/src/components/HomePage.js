@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 
 import Feed from './Feed';
-import OnlineUsers from './OnlineUsers';
 
 class HomePage extends Component {
     render() {
