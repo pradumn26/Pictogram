@@ -40,6 +40,8 @@ require('./routes/apis/likeApi')(app);
 require('./routes/apis/unlikeApi')(app);
 require('./routes/apis/addCommentApi')(app);
 require('./routes/apis/havePosts')(app);
+require('./routes/apis/fetchNotificationsApi')(app);
+require('./routes/apis/markNotiAsReadApi')(app);
 
 const PORT = process.env.NODE_ENV || 4444;
 app.listen(PORT, () => {

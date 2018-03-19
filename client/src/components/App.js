@@ -10,6 +10,7 @@ import {fetchCurrentUser} from "../actions";
 import OAuthSignup from './OAuthSignup';
 import Accounts from './Accounts';
 import OtherUser from './OtherUser';
+import Post from './Post';
 
 class App extends Component {
     componentDidMount() {
@@ -34,6 +35,8 @@ class App extends Component {
                         <Route path="/accounts" component={Accounts}/>
 
                         <Route path="/user/:user" component={OtherUser}/>
+
+                        <Route path="/post" component={Post}/>
                     </div>
                 </BrowserRouter>
             </div>

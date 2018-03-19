@@ -24,7 +24,7 @@ exports = module.exports = (app) => {
                 if (user.posts[i].postNo === postNo - 1)
                     post1 = user.posts[i];
 
-                if(post1 && post2)
+                if (post1 && post2)
                     break;
             }
             console.log(post1, post2);
@@ -41,12 +41,26 @@ exports = module.exports = (app) => {
 
         user.followersList.push(req.user);
         user.profile.followersNumber = user.profile.followersNumber + 1;
+
+        let noti = {
+            notification: 'started following you.',
+            _owner: req.user._id,
+            username: req.user.profile.username,
+            owner_profilePhoto: req.user.profile.profilePhoto,
+            url: '/user/' + req.user.profile.username
+        };
+        if (user.notifications.length === 20) {
+            user.notifications.splice(0, 1);
+            user.notifications.push(noti);
+        } else {
+            user.notifications.push(noti);
+        }
         try {
             await user.save();
         } catch (err) {
             console.log(err);
         }
 
-        res.redirect('/user/'+username);
+        res.redirect('/user/' + username);
     });
 };

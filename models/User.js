@@ -4,6 +4,7 @@ const {Schema} = mongoose;
 const postsSchema = require('./postsSchema');
 const followersSchema = require('./followersSchema');
 const followingSchema = require('./followingSchema');
+const notificationsSchema = require('./notificationsSchema');
 
 const UserSchema = new Schema({
     profile: {
@@ -42,7 +43,8 @@ const UserSchema = new Schema({
     followingList: [followingSchema],
     nextPost: {type: Number, default: 1},
     feed: [postsSchema],
-    likedPosts: [postsSchema]
+    likedPosts: [postsSchema],
+    notifications: [notificationsSchema]
 });
 
 mongoose.model('user', UserSchema);
