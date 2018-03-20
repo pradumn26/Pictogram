@@ -34,8 +34,13 @@ class ProfilePage extends Component {
                                     <strong>Following: {this.props.currentUser.followingNumber}</strong>
                                 </div>
 
-                                <button id="editProfileButton" className="btn" style={{cursor: 'pointer'}}>Edit
-                                    profile
+                                <button id="editProfileButton"
+                                        className="btn"
+                                        style={{cursor: 'pointer'}}
+                                        onClick={() => {
+                                            window.location.assign('/EditProfile')
+                                        }}>
+                                    Edit profile
                                 </button>
 
                                 <form action="/upload" method="POST" encType="multipart/form-data" id="uploadForm">

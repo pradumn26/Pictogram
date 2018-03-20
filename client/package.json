@@ -23,6 +23,9 @@
     },
     "/oauthSignUp": {
       "target": "http://localhost:4444"
+    },
+    "/upload_profilePicture": {
+      "target": "http://localhost:4444"
     }
   },
   "dependencies": {

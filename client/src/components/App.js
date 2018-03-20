@@ -11,6 +11,7 @@ import OAuthSignup from './OAuthSignup';
 import Accounts from './Accounts';
 import OtherUser from './OtherUser';
 import Post from './Post';
+import EditProfile from './EditProfile';
 
 class App extends Component {
     componentDidMount() {
@@ -37,6 +38,8 @@ class App extends Component {
                         <Route path="/user/:user" component={OtherUser}/>
 
                         <Route path="/post" component={Post}/>
+
+                        <Route path="/EditProfile" component={EditProfile}/>
                     </div>
                 </BrowserRouter>
             </div>

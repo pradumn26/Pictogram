@@ -42,6 +42,9 @@ require('./routes/apis/addCommentApi')(app);
 require('./routes/apis/havePosts')(app);
 require('./routes/apis/fetchNotificationsApi')(app);
 require('./routes/apis/markNotiAsReadApi')(app);
+require('./routes/apis/fetchAccountDetails')(app);
+require('./routes/uploadRoutes/profilePictureUploadRoute')(app);
+require('./routes/apis/updateProfile')(app);
 
 const PORT = process.env.NODE_ENV || 4444;
 app.listen(PORT, () => {
