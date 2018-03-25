@@ -61,7 +61,7 @@ exports = module.exports = app => {
         crossorigin="anonymous"></script>
 <script src="/libs/jquery-3.2.1.js"></script>
 <script src="/libs/image-scale.js"></script>
-<script type="text/javascript" src="/static/js/main.19ef5c10.js"></script>
+<script type="text/javascript" src="/static/js/main.9a4e4b50.js"></script>
 </body>
 </html>`;
 
