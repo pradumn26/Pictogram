@@ -1,0 +1,17 @@
+#search-bar{
+  ::placeholder{
+    color: #E0F2F1;
+  }
+  :-ms-input-placeholder{
+    color: #E0F2F1;
+  }
+
+  input{
+    border-radius: 0;
+    border: 1px solid;
+    height: 25px;
+    border-color: #B2DFDB;
+    background-color: #B2DFDB;
+    color: #E0F2F1;
+  }
+}
